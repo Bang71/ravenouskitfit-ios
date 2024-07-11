@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10725DED2C3ACE4F0031A763 /* UniformViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10725DEC2C3ACE4F0031A763 /* UniformViewModel.swift */; };
+		1076CC982C3F7C0A00888622 /* UniformRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076CC972C3F7C0A00888622 /* UniformRowView.swift */; };
 		10B527292C22E7D900F12288 /* kitfitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527282C22E7D900F12288 /* kitfitApp.swift */; };
 		10B5272B2C22E7D900F12288 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5272A2C22E7D900F12288 /* ContentView.swift */; };
-		10B5272D2C22E7D900F12288 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5272C2C22E7D900F12288 /* Item.swift */; };
 		10B5272F2C22E7DB00F12288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B5272E2C22E7DB00F12288 /* Assets.xcassets */; };
 		10B527322C22E7DB00F12288 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B527312C22E7DB00F12288 /* Preview Assets.xcassets */; };
 		10B5273C2C22E7DB00F12288 /* kitfitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5273B2C22E7DB00F12288 /* kitfitTests.swift */; };
@@ -17,6 +18,10 @@
 		10B527482C22E7DB00F12288 /* kitfitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527472C22E7DB00F12288 /* kitfitUITestsLaunchTests.swift */; };
 		10B527572C22E87A00F12288 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527562C22E87A00F12288 /* AppData.swift */; };
 		10B527592C22E89C00F12288 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527582C22E89C00F12288 /* SplashScreen.swift */; };
+		10B5275D2C23F2F800F12288 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5275C2C23F2F800F12288 /* HomeView.swift */; };
+		10B5275F2C24073400F12288 /* Uniform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5275E2C24073400F12288 /* Uniform.swift */; };
+		10B527612C2407A000F12288 /* EditUniformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527602C2407A000F12288 /* EditUniformView.swift */; };
+		10B527632C240A0C00F12288 /* UniformListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527622C240A0C00F12288 /* UniformListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,10 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10725DEC2C3ACE4F0031A763 /* UniformViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformViewModel.swift; sourceTree = "<group>"; };
+		1076CC972C3F7C0A00888622 /* UniformRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformRowView.swift; sourceTree = "<group>"; };
 		10B527252C22E7D900F12288 /* kitfit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kitfit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B527282C22E7D900F12288 /* kitfitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kitfitApp.swift; sourceTree = "<group>"; };
 		10B5272A2C22E7D900F12288 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		10B5272C2C22E7D900F12288 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		10B5272E2C22E7DB00F12288 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10B527312C22E7DB00F12288 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		10B527372C22E7DB00F12288 /* kitfitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kitfitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +56,10 @@
 		10B527472C22E7DB00F12288 /* kitfitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kitfitUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		10B527562C22E87A00F12288 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		10B527582C22E89C00F12288 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		10B5275C2C23F2F800F12288 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		10B5275E2C24073400F12288 /* Uniform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uniform.swift; sourceTree = "<group>"; };
+		10B527602C2407A000F12288 /* EditUniformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUniformView.swift; sourceTree = "<group>"; };
+		10B527622C240A0C00F12288 /* UniformListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10725DEE2C3AD8EA0031A763 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				10B527562C22E87A00F12288 /* AppData.swift */,
+				10B5275E2C24073400F12288 /* Uniform.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		10B5271C2C22E7D900F12288 = {
 			isa = PBXGroup;
 			children = (
@@ -100,11 +119,12 @@
 		10B527272C22E7D900F12288 /* kitfit */ = {
 			isa = PBXGroup;
 			children = (
+				10725DEE2C3AD8EA0031A763 /* Model */,
 				10B527552C22E86F00F12288 /* ViewModel */,
 				10B527542C22E86B00F12288 /* View */,
 				10B527282C22E7D900F12288 /* kitfitApp.swift */,
 				10B5272A2C22E7D900F12288 /* ContentView.swift */,
-				10B5272C2C22E7D900F12288 /* Item.swift */,
+				10B527582C22E89C00F12288 /* SplashScreen.swift */,
 				10B5272E2C22E7DB00F12288 /* Assets.xcassets */,
 				10B527302C22E7DB00F12288 /* Preview Content */,
 			);
@@ -139,7 +159,10 @@
 		10B527542C22E86B00F12288 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				10B527582C22E89C00F12288 /* SplashScreen.swift */,
+				10B5275C2C23F2F800F12288 /* HomeView.swift */,
+				10B527622C240A0C00F12288 /* UniformListView.swift */,
+				1076CC972C3F7C0A00888622 /* UniformRowView.swift */,
+				10B527602C2407A000F12288 /* EditUniformView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,7 +170,7 @@
 		10B527552C22E86F00F12288 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				10B527562C22E87A00F12288 /* AppData.swift */,
+				10725DEC2C3ACE4F0031A763 /* UniformViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -282,11 +305,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10B5275F2C24073400F12288 /* Uniform.swift in Sources */,
 				10B527592C22E89C00F12288 /* SplashScreen.swift in Sources */,
+				1076CC982C3F7C0A00888622 /* UniformRowView.swift in Sources */,
+				10B5275D2C23F2F800F12288 /* HomeView.swift in Sources */,
+				10725DED2C3ACE4F0031A763 /* UniformViewModel.swift in Sources */,
+				10B527612C2407A000F12288 /* EditUniformView.swift in Sources */,
 				10B5272B2C22E7D900F12288 /* ContentView.swift in Sources */,
-				10B5272D2C22E7D900F12288 /* Item.swift in Sources */,
 				10B527292C22E7D900F12288 /* kitfitApp.swift in Sources */,
 				10B527572C22E87A00F12288 /* AppData.swift in Sources */,
+				10B527632C240A0C00F12288 /* UniformListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

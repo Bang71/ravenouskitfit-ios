@@ -8,23 +8,45 @@
 import SwiftUI
 
 struct ContentView: View {
-    var appData: AppData = .init()
+    @EnvironmentObject private var appData: AppData
     
     var body: some View {
         ZStack {
-            Text("메인 화면")
-                .font(.largeTitle)
-                .padding()
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                    }
+                
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "star.fill")
+                        Text("Favorites")
+                    }
+                
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "bell")
+                        Text("Notification")
+                    }
+                
+                UniformListView(viewModel: appData.uniformViewModel)
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
+            }
             
             if !appData.isSplashFinished {
                 SplashScreen()
             }
         }
-        .environment(appData)
         .preferredColorScheme(.dark)
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AppData())
 }

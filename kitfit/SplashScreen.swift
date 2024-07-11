@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SplashScreen: View {
-    @Environment(AppData.self) private var appData
+    @EnvironmentObject private var appData: AppData
     @State private var opacity: Double = 0.0
     
     var body: some View {
