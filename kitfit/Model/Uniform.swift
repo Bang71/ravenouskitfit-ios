@@ -13,10 +13,10 @@ struct Uniform: Codable, Identifiable {
     var year: Int
     var kit: String
     var regionCode: String
-    var size: String
+    var sizeCode: String
     
     static let clubs = ["ULSAN HD", "LIVERPOOL"]
     static let kits = ["HOME", "AWAY", "THIRD", "CLASSIC", "BRAND"]
     static let regionCodes = ["KR", "EUR", "US", "CH", "JP"]
-    static let sizes = ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
+    static let sizeCodes = ["XS", "S", "M", "L", "XL", "2XL", "3XL"]
 }

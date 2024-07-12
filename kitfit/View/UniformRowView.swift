@@ -27,7 +27,7 @@ struct UniformRowView: View {
                     .font(.headline)
                 Text("\(String(uniform.year)) - \(uniform.kit)")
                     .font(.subheadline)
-                Text("\(uniform.regionCode) \(uniform.size)")
+                Text("\(uniform.regionCode) \(uniform.sizeCode)")
                     .font(.subheadline)
             }
             

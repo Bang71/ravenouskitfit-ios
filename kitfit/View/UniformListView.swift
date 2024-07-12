@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UniformListView: View {
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var appData: AppData
     @StateObject private var viewModel: UniformViewModel
     @State private var showingAddUniform = false
@@ -52,19 +54,32 @@ struct UniformListView: View {
             }
             .navigationTitle("유니폼 목록")
             .sheet(isPresented: $showingAddUniform) {
-                EditUniformView(viewModel: viewModel, uniform: nil, isPresented: $showingAddUniform)
+                EditUniformView(
+                    viewModel: viewModel,
+                    uniform: .constant(nil),
+                    isPresented: $showingAddUniform,
+                    modelContext: modelContext
+                )
             }
             .sheet(item: $editingUniform) { uniform in
-                EditUniformView(viewModel: viewModel, uniform: uniform, isPresented: Binding(
-                    get: { editingUniform != nil },
-                    set: { if !$0 { editingUniform = nil } }
-                ))
+                EditUniformView(
+                    viewModel: viewModel,
+                    uniform: Binding(
+                        get: { editingUniform },
+                        set: { editingUniform = $0 }
+                    ),
+                    isPresented: Binding(
+                        get: { editingUniform != nil },
+                        set: { if !$0 { editingUniform = nil } }
+                    ),
+                    modelContext: modelContext
+                )
             }
         }
     }
 }
 
-#Preview {
-    UniformListView(viewModel: UniformViewModel())
-        .environmentObject(AppData())
-}
+//#Preview {
+//    UniformListView(viewModel: UniformViewModel())
+//        .environmentObject(AppData())
+//}
