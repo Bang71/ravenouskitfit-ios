@@ -56,20 +56,36 @@ class KitDataManager {
     
     func getYears(for club: String) async throws -> [Int] {
         let descriptor = FetchDescriptor<Kit>(
-            predicate: #Predicate { $0.club == club },
-            sortBy: [SortDescriptor(\.year, order: .reverse)]
+            predicate: #Predicate { $0.club == club }
         )
         let kits = try modelContext.fetch(descriptor)
-        return Array(Set(kits.map { $0.year })).sorted(by: >)
+        return Array(Set(kits.map { $0.year })).sorted(by: <)
     }
     
     func getKitNames(for club: String, in year: Int) async throws -> [String] {
         let descriptor = FetchDescriptor<Kit>(
-            predicate: #Predicate { $0.club == club && $0.year == year },
-            sortBy: [SortDescriptor(\.name)]
+            predicate: #Predicate { $0.club == club && $0.year == year }
         )
         let kits = try modelContext.fetch(descriptor)
         return kits.map { $0.name }
+    }
+    
+    func getRegionCodes(for club: String, year: Int, kitName: String) async throws -> [String] {
+        let descriptor = FetchDescriptor<Kit>(predicate: #Predicate {
+            $0.club == club && $0.year == year && $0.name == kitName
+        })
+        let kit = try modelContext.fetch(descriptor).first
+        let regionCodes = Set(kit?.sizes.map { $0.regionCode } ?? [])
+        return Array(regionCodes).sorted()
+    }
+    
+    func getSizeCodes(for club: String, year: Int, kitName: String, regionCode: String) async throws -> [String] {
+        let descriptor = FetchDescriptor<Kit>(predicate: #Predicate {
+            $0.club == club && $0.year == year && $0.name == kitName
+        })
+        let kit = try modelContext.fetch(descriptor).first
+        let sizeCodes = kit?.sizes.filter { $0.regionCode == regionCode }.map { $0.sizeCode } ?? []
+        return sizeCodes.sorted()
     }
     
     enum KitDataError: Error {

@@ -13,14 +13,18 @@ struct EditUniformView: View {
     @ObservedObject var viewModel: UniformViewModel
     @Binding var uniform: Uniform?
     @Binding var isPresented: Bool
-    @State private var editedUniform: Uniform
+    
     @State private var selectedClub: String = ""
-    @State private var selectedYear: Int?
+    @State private var selectedYear: Int = Calendar.current.component(.year, from: Date())
     @State private var selectedKit: String = ""
+    @State private var selectedRegionCode: String = ""
+    @State private var selectedSizeCode: String = ""
     
     @State private var availableClubs: [String] = []
     @State private var availableYears: [Int] = []
     @State private var availableKits: [String] = []
+    @State private var availableRegionCodes: [String] = []
+    @State private var availableSizeCodes: [String] = []
     
     private let kitDataManager: KitDataManager
     
@@ -30,26 +34,14 @@ struct EditUniformView: View {
         self._isPresented = isPresented
         self.kitDataManager = KitDataManager(modelContext: modelContext)
         
-        let initialUniform = uniform.wrappedValue ?? Uniform(id: UUID(), club: "", year: Calendar.current.component(.year, from: Date()), kit: "", regionCode: "", sizeCode: "")
-        self._editedUniform = State(initialValue: initialUniform)
-        self._selectedClub = State(initialValue: initialUniform.club)
-        self._selectedYear = State(initialValue: initialUniform.year)
-        self._selectedKit = State(initialValue: initialUniform.kit)
+        if let uniformValue = uniform.wrappedValue {
+            _selectedClub = State(initialValue: uniformValue.club)
+            _selectedYear = State(initialValue: uniformValue.year)
+            _selectedKit = State(initialValue: uniformValue.kit)
+            _selectedRegionCode = State(initialValue: uniformValue.regionCode)
+            _selectedSizeCode = State(initialValue: uniformValue.sizeCode)
+        }
     }
-    
-    //    init(viewModel: UniformViewModel, uniform: Binding<Uniform?>, isPresented: Binding<Bool>) {
-    //        self.viewModel = viewModel
-    //        self._uniform = uniform
-    //        self._isPresented = isPresented
-    //        self._editedUniform = State(initialValue: uniform.wrappedValue ?? Uniform(
-    //            id: UUID(),
-    //            club: Uniform.clubs.first ?? "",
-    //            year: Calendar.current.component(.year, from: Date()),
-    //            kit: Uniform.kits.first ?? "",
-    //            regionCode: Uniform.regionCodes.first ?? "",
-    //            sizeCode: Uniform.sizeCodes.first ?? ""
-    //        ))
-    //    }
     
     var body: some View {
         NavigationView {
@@ -82,16 +74,27 @@ struct EditUniformView: View {
                             Text(kit).tag(kit)
                         }
                     }
+                    .onChange(of: selectedKit) { oldValue, newValue in
+                        Task {
+                            await loadRegionCodes()
+                        }
+                    }
                 }
                 
                 Section(header: Text("사이즈 정보")) {
-                    Picker("지역 코드", selection: $editedUniform.regionCode) {
-                        ForEach(Uniform.regionCodes, id: \.self) { code in
+                    Picker("지역 코드", selection: $selectedRegionCode) {
+                        ForEach(availableRegionCodes, id: \.self) { code in
                             Text(code).tag(code)
                         }
                     }
-                    Picker("사이즈", selection: $editedUniform.sizeCode) {
-                        ForEach(Uniform.sizeCodes, id: \.self) { size in
+                    .onChange(of: selectedRegionCode) { oldValue, newValue in
+                        Task {
+                            await loadSizeCodes()
+                        }
+                    }
+                    
+                    Picker("사이즈", selection: $selectedSizeCode) {
+                        ForEach(availableSizeCodes, id: \.self) { size in
                             Text(size).tag(size)
                         }
                     }
@@ -111,10 +114,10 @@ struct EditUniformView: View {
     private func loadClubs() async {
         do {
             availableClubs = try await kitDataManager.getAllClubs()
-            if !availableClubs.isEmpty && selectedClub.isEmpty {
-                selectedClub = availableClubs[0]
-                await loadYears()
+            if selectedClub.isEmpty && !availableClubs.isEmpty, let firstClub = availableClubs.first {
+                selectedClub = firstClub
             }
+            await loadYears()
         } catch {
             print("Error loading clubs: \(error)")
         }
@@ -123,10 +126,10 @@ struct EditUniformView: View {
     private func loadYears() async {
         do {
             availableYears = try await kitDataManager.getYears(for: selectedClub)
-            if !availableYears.isEmpty {
-                selectedYear = availableYears[0]
-                await loadKits()
+            if !availableYears.contains(selectedYear), let firstYear = availableYears.first {
+                selectedYear = firstYear
             }
+            await loadKits()
         } catch {
             print("Error loading years: \(error)")
         }
@@ -134,26 +137,53 @@ struct EditUniformView: View {
     
     private func loadKits() async {
         do {
-            if let year = selectedYear {
-                availableKits = try await kitDataManager.getKitNames(for: selectedClub, in: year)
-                if !availableKits.isEmpty && !availableKits.contains(selectedKit) {
-                    selectedKit = availableKits[0]
-                }
+            availableKits = try await kitDataManager.getKitNames(for: selectedClub, in: selectedYear)
+            if selectedKit.isEmpty || !availableKits.contains(selectedKit), let firstKit = availableKits.first {
+                selectedKit = firstKit
             }
+            await loadRegionCodes()
         } catch {
             print("Error loading kits: \(error)")
         }
     }
     
+    private func loadRegionCodes() async {
+        do {
+            availableRegionCodes = try await kitDataManager.getRegionCodes(for: selectedClub, year: selectedYear, kitName: selectedKit)
+            if !availableRegionCodes.contains(selectedRegionCode), let firstRegionCode = availableRegionCodes.first {
+                selectedRegionCode = firstRegionCode
+            }
+            await loadSizeCodes()
+        } catch {
+            print("Error loading region codes: \(error)")
+        }
+    }
+    
+    private func loadSizeCodes() async {
+        do {
+            availableSizeCodes = try await kitDataManager.getSizeCodes(for: selectedClub, year: selectedYear, kitName: selectedKit, regionCode: selectedRegionCode)
+            if !availableSizeCodes.contains(selectedSizeCode), let firstSizeCode = availableSizeCodes.first {
+                selectedSizeCode = firstSizeCode
+            }
+        } catch {
+            print("Error loading size codes: \(error)")
+        }
+    }
+    
     private func saveUniform() {
-        editedUniform.club = selectedClub
-        editedUniform.year = selectedYear ?? Calendar.current.component(.year, from: Date())
-        editedUniform.kit = selectedKit
+        let updatedUniform = Uniform(
+            id: uniform?.id ?? UUID(),
+            club: selectedClub,
+            year: selectedYear,
+            kit: selectedKit,
+            regionCode: selectedRegionCode,
+            sizeCode: selectedSizeCode
+        )
         
         if uniform == nil {
-            viewModel.addUniform(editedUniform)
+            viewModel.addUniform(updatedUniform)
         } else {
-            viewModel.updateUniform(editedUniform)
+            viewModel.updateUniform(updatedUniform)
         }
         isPresented = false
     }

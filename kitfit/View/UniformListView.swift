@@ -65,7 +65,7 @@ struct UniformListView: View {
                 EditUniformView(
                     viewModel: viewModel,
                     uniform: Binding(
-                        get: { editingUniform },
+                        get: { uniform },
                         set: { editingUniform = $0 }
                     ),
                     isPresented: Binding(
