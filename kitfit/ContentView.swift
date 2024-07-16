@@ -33,7 +33,7 @@ struct ContentView: View {
                         Text("Notification")
                     }
                 
-                UniformListView(viewModel: appData.uniformViewModel)
+                SettingsMainView()
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")

@@ -9,10 +9,7 @@ import Foundation
 
 class UniformViewModel: ObservableObject {
     private let userDefaults = UserDefaults.standard
-    private enum UserDefaultsKeys {
-        static let uniforms = "SavedUniforms"
-        static let defaultUniformID = "DefaultUniformID"
-    }
+    private let savedUniformsKey = "SavedUniforms"
     
     @Published var uniforms: [Uniform] = [] {
         didSet {
@@ -20,15 +17,8 @@ class UniformViewModel: ObservableObject {
         }
     }
     
-    @Published var defaultUniformID: UUID? {
-        didSet {
-            saveDefaultUniformID()
-        }
-    }
-    
     init() {
         loadUniforms()
-        loadDefaultUniformID()
     }
     
     func addUniform(_ uniform: Uniform) {
@@ -44,28 +34,14 @@ class UniformViewModel: ObservableObject {
         uniforms.removeAll { $0.id == uniform.id }
     }
     
-    func setDefaultUniform(_ uniform: Uniform) {
-        defaultUniformID = uniform.id
-    }
-    
     private func saveUniforms() {
         guard let encoded = try? JSONEncoder().encode(uniforms) else { return }
-        userDefaults.set(encoded, forKey: UserDefaultsKeys.uniforms)
+        userDefaults.set(encoded, forKey: savedUniformsKey)
     }
     
     private func loadUniforms() {
-        guard let savedUniforms = UserDefaults.standard.data(forKey: UserDefaultsKeys.uniforms),
+        guard let savedUniforms = UserDefaults.standard.data(forKey: savedUniformsKey),
               let decodedUniforms = try? JSONDecoder().decode([Uniform].self, from: savedUniforms) else { return }
         uniforms = decodedUniforms
-    }
-    
-    private func saveDefaultUniformID() {
-        userDefaults.set(defaultUniformID?.uuidString, forKey: UserDefaultsKeys.defaultUniformID)
-    }
-    
-    private func loadDefaultUniformID() {
-        guard let defaultIDString = userDefaults.string(forKey: UserDefaultsKeys.defaultUniformID),
-              let defaultID = UUID(uuidString: defaultIDString) else { return }
-        defaultUniformID = defaultID
     }
 }

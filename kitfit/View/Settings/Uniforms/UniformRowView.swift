@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct UniformRowView: View {
-    @ObservedObject var viewModel: UniformViewModel
+    @AppStorage("defaultUniformID") private var defaultUniformIDString: String = ""
     let uniform: Uniform
     var onEdit: () -> Void
 
+    private var defaultUniformID: UUID? {
+        UUID(uuidString: defaultUniformIDString)
+    }
+    
     var body: some View {
         HStack(spacing: 10) {
             Button(action: {
-                viewModel.setDefaultUniform(uniform)
+                defaultUniformIDString = uniform.id.uuidString
             }) {
-                Image(systemName: viewModel.defaultUniformID == uniform.id ? "largecircle.fill.circle" : "circle")
+                Image(systemName: defaultUniformID == uniform.id ? "largecircle.fill.circle" : "circle")
             }
             .foregroundColor(.blue)
             .buttonStyle(PlainButtonStyle())

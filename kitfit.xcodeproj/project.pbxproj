@@ -13,6 +13,8 @@
 		1076CC9F2C40C18400888622 /* KitSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076CC9E2C40C18400888622 /* KitSize.swift */; };
 		1076CCA22C40C1D800888622 /* KitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076CCA12C40C1D800888622 /* KitDataManager.swift */; };
 		1076CCA42C40CB2500888622 /* SampleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076CCA32C40CB2500888622 /* SampleDataManager.swift */; };
+		1086F4C82C4604DC0071F100 /* BodyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1086F4C72C4604DC0071F100 /* BodyInfoView.swift */; };
+		1086F4CA2C4609360071F100 /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1086F4C92C4609360071F100 /* SettingsMainView.swift */; };
 		10B527292C22E7D900F12288 /* kitfitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B527282C22E7D900F12288 /* kitfitApp.swift */; };
 		10B5272B2C22E7D900F12288 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B5272A2C22E7D900F12288 /* ContentView.swift */; };
 		10B5272F2C22E7DB00F12288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B5272E2C22E7DB00F12288 /* Assets.xcassets */; };
@@ -52,6 +54,8 @@
 		1076CC9E2C40C18400888622 /* KitSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitSize.swift; sourceTree = "<group>"; };
 		1076CCA12C40C1D800888622 /* KitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitDataManager.swift; sourceTree = "<group>"; };
 		1076CCA32C40CB2500888622 /* SampleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataManager.swift; sourceTree = "<group>"; };
+		1086F4C72C4604DC0071F100 /* BodyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyInfoView.swift; sourceTree = "<group>"; };
+		1086F4C92C4609360071F100 /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
 		10B527252C22E7D900F12288 /* kitfit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kitfit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B527282C22E7D900F12288 /* kitfitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kitfitApp.swift; sourceTree = "<group>"; };
 		10B5272A2C22E7D900F12288 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +117,34 @@
 				1076CCA32C40CB2500888622 /* SampleDataManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		1086F4C32C4603AC0071F100 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1086F4C92C4609360071F100 /* SettingsMainView.swift */,
+				1086F4C52C46043A0071F100 /* Profile */,
+				1086F4C42C4604140071F100 /* Uniforms */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1086F4C42C4604140071F100 /* Uniforms */ = {
+			isa = PBXGroup;
+			children = (
+				10B527622C240A0C00F12288 /* UniformListView.swift */,
+				1076CC972C3F7C0A00888622 /* UniformRowView.swift */,
+				10B527602C2407A000F12288 /* EditUniformView.swift */,
+			);
+			path = Uniforms;
+			sourceTree = "<group>";
+		};
+		1086F4C52C46043A0071F100 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1086F4C72C4604DC0071F100 /* BodyInfoView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		10B5271C2C22E7D900F12288 = {
@@ -180,9 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				10B5275C2C23F2F800F12288 /* HomeView.swift */,
-				10B527622C240A0C00F12288 /* UniformListView.swift */,
-				1076CC972C3F7C0A00888622 /* UniformRowView.swift */,
-				10B527602C2407A000F12288 /* EditUniformView.swift */,
+				1086F4C32C4603AC0071F100 /* Settings */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,6 +356,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B5275F2C24073400F12288 /* Uniform.swift in Sources */,
+				1086F4C82C4604DC0071F100 /* BodyInfoView.swift in Sources */,
+				1086F4CA2C4609360071F100 /* SettingsMainView.swift in Sources */,
 				10B527592C22E89C00F12288 /* SplashScreen.swift in Sources */,
 				1076CC9D2C40C17300888622 /* Kit.swift in Sources */,
 				1076CC9F2C40C18400888622 /* KitSize.swift in Sources */,
