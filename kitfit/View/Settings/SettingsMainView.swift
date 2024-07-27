@@ -48,6 +48,9 @@ struct SettingsMainView: View {
                 }
             }
         }
+        .onDisappear {
+            path = NavigationPath()
+        }
     }
 }
 
