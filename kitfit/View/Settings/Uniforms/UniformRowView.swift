@@ -11,9 +11,9 @@ struct UniformRowView: View {
     @AppStorage("defaultUniformID") private var defaultUniformIDString: String = ""
     let uniform: Uniform
     var onEdit: () -> Void
-
-    private var defaultUniformID: UUID? {
-        UUID(uuidString: defaultUniformIDString)
+    
+    private var isDefaultUniform: Bool {
+        defaultUniformIDString == uniform.id.uuidString
     }
     
     var body: some View {
@@ -21,14 +21,21 @@ struct UniformRowView: View {
             Button(action: {
                 defaultUniformIDString = uniform.id.uuidString
             }) {
-                Image(systemName: defaultUniformID == uniform.id ? "largecircle.fill.circle" : "circle")
+                Image(systemName: isDefaultUniform ? "largecircle.fill.circle" : "circle")
             }
             .foregroundColor(.blue)
             .buttonStyle(PlainButtonStyle())
             
             VStack(alignment: .leading) {
-                Text(uniform.club)
-                    .font(.headline)
+                HStack {
+                    Text(uniform.club)
+                        .font(.headline)
+                    if isDefaultUniform {
+                        Text("(기본)")
+                            .font(.subheadline)
+                            .foregroundColor(Color(.white))
+                    }
+                }
                 Text("\(String(uniform.year)) - \(uniform.kit)")
                     .font(.subheadline)
                 Text("\(uniform.regionCode) \(uniform.sizeCode)")
